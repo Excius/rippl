@@ -27,6 +27,7 @@ interface MobileNavbarProps {
     id?: string;
     email?: string | null;
     name?: string | null;
+    username?: string | null;
   } | null;
 }
 
@@ -91,9 +92,7 @@ function MobileNavbar({ user }: MobileNavbarProps) {
                   asChild
                   onClick={() => setShowMobileMenu(false)}
                 >
-                  <Link
-                    href={`/profile/${user.name ?? user.email?.split("@")[0]}`}
-                  >
+                  <Link href={`/profile/${user.username ?? "null"}`}>
                     <UserIcon className="w-4 h-4" />
                     Profile
                   </Link>

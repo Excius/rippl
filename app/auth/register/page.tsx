@@ -2,10 +2,10 @@ import { register } from "@/actions/auth";
 import { LockIcon, MailIcon, UserIcon } from "lucide-react";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { getSession } from "@/lib/getSession";
+import { auth } from "@/lib/auth";
 
 async function signUp() {
-  const session = await getSession();
+  const session = await auth();
   if (session?.user) redirect("/");
   return (
     <div className="w-full max-w-md mx-auto">
@@ -61,7 +61,7 @@ async function signUp() {
       <p className="text-center text-gray-400">
         Already have an account?{" "}
         <Link
-          href="/login"
+          href="/auth/login"
           className="font-semibold text-purple-400 hover:text-purple-300"
         >
           Sign in

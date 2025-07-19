@@ -1,25 +1,31 @@
-import { getSession } from "@/lib/getSession";
+import { getPosts } from "@/actions/post";
+import CreatePost from "@/components/CreatePost";
+import PostCard from "@/components/PostCard";
+import WhoToFollow from "@/components/WhoToFollow";
+import { auth } from "@/lib/auth";
 
 export default async function Home() {
-  const session = await getSession();
-  // console.log("Session data:", session);
+  const session = await auth();
+  const posts = await getPosts();
 
   return (
-    <div className="m-4">
-      <h1>Home Page</h1>
-      {session?.user ? (
-        <div className="mt-4 p-4 bg-green-100 dark:bg-green-800 rounded-lg">
-          <p className="text-green-800 dark:text-green-200">
-            Welcome back, {JSON.stringify(session)}!
-          </p>
+    <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
+      <div className="lg:col-span-6">
+        {session?.user ? <CreatePost /> : null}
+
+        <div className="space-y-6">
+          {posts.map((post) => (
+            <PostCard
+              key={post.id}
+              post={post}
+              userId={session?.user?.id || ""}
+            />
+          ))}
         </div>
-      ) : (
-        <div className="mt-4 p-4 bg-yellow-100 dark:bg-yellow-800 rounded-lg">
-          <p className="text-yellow-800 dark:text-yellow-200">
-            You are not logged in.
-          </p>
-        </div>
-      )}
+      </div>
+      <div className="hidden lg:block lg:col-span-4 sticky top-20">
+        <WhoToFollow />
+      </div>
     </div>
   );
 }

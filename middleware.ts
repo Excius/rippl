@@ -5,6 +5,7 @@ export default auth((req) => {
   const { pathname } = req.nextUrl;
 
   if (
+    pathname === "/" ||
     pathname.startsWith("/auth/login") ||
     pathname.startsWith("/auth/register") ||
     pathname === "/auth/newUser" ||
@@ -20,7 +21,12 @@ export default auth((req) => {
     return NextResponse.redirect(newUrl);
   }
 
-  return NextResponse.next();
+  if (req.auth?.user) {
+    return NextResponse.next();
+  }
+
+  const newUrl = new URL("/", req.nextUrl.origin);
+  return NextResponse.redirect(newUrl);
 });
 
 export const config = {

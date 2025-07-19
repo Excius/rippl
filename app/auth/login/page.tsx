@@ -2,12 +2,11 @@ import { LockIcon, MailIcon } from "lucide-react";
 import { GrGoogle } from "react-icons/gr";
 import { FiGithub } from "react-icons/fi";
 import Link from "next/link";
-import { signIn } from "@/lib/auth";
+import { auth, signIn } from "@/lib/auth";
 import { redirect } from "next/navigation";
-import { getSession } from "@/lib/getSession";
 
 async function Login() {
-  const session = await getSession();
+  const session = await auth();
   if (session?.user) redirect("/");
   return (
     <div className="w-full max-w-md mx-auto">
@@ -96,7 +95,7 @@ async function Login() {
       <p className="text-center text-gray-400">
         {"Don't have an account?"}
         <Link
-          href="/register"
+          href="/auth/register"
           className="font-semibold text-purple-400 hover:text-purple-300"
         >
           Sign up
