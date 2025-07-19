@@ -104,6 +104,13 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       return session;
     },
   },
+  events: {
+    async signIn({ isNewUser, user, account }) {
+      if (isNewUser && account?.provider !== "credentials") {
+        console.log("New user sign-in:", user.email);
+      }
+    },
+  },
   jwt: {
     encode: async function (params) {
       if (params.token?.credentials) {
@@ -131,6 +138,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   },
   pages: {
     signIn: "/auth/login",
+    error: "/auth/login",
     newUser: "/auth/newUser",
   },
+  // debug: process.env.NODE_ENV === "development",
 });
