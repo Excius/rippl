@@ -137,6 +137,8 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
               <CldImage
                 src={post.image}
                 alt="Post content"
+                width={960}
+                height={480}
                 className="w-full h-auto object-cover"
               />
             </div>
