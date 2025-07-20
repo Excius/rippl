@@ -33,4 +33,5 @@ export const config = {
   matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };
 
+// NOTE: add export const runtime = nodejs while deploying
 export const runtime = "nodejs";

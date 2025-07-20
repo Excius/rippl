@@ -6,8 +6,11 @@ import Credentials from "next-auth/providers/credentials";
 import { encode } from "next-auth/jwt";
 import { compare } from "bcryptjs";
 import { z } from "zod";
-import { PrismaClient } from "@prisma/client";
-import { PrismaNeon } from "@prisma/adapter-neon";
+import { prisma } from "./prisma";
+
+// NOTE: Comment out while deploying
+// import { PrismaClient } from "@prisma/client";
+// import { PrismaNeon } from "@prisma/adapter-neon";
 
 // Extend NextAuth User type to include 'username'
 declare module "next-auth" {
@@ -21,10 +24,10 @@ const credentialsSchema = z.object({
   password: z.string().min(6).max(20),
 });
 
-const connectionString = `${process.env.DATABASE_URL}`;
-
-const adapter = new PrismaNeon({ connectionString });
-const prisma = new PrismaClient({ adapter });
+// NOTE: Comment out while deploying
+// const connectionString = `${process.env.DATABASE_URL}`;
+// const adapter = new PrismaNeon({ connectionString });
+// const prisma = new PrismaClient({ adapter });
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),

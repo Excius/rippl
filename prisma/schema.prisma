@@ -7,9 +7,11 @@
 generator client {
   provider        = "prisma-client-js"
   output          = "../lib/generated/prisma"
-  previewFeatures = ["relationJoins", "driverAdapters"]
+  previewFeatures = ["relationJoins"]
   binaryTargets   = ["native", "rhel-openssl-3.0.x"]
 }
+
+//NOTE: Remove `driverAdapters` to previewFeatures and Add binaryTargets   = ["native", "rhel-openssl-3.0.x"] while deploying
 
 datasource db {
   provider = "postgresql"
