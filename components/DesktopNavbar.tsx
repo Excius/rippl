@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import ModeToggle from "./ModeToggle";
 import { auth, signOut } from "@/lib/auth";
+import { revalidatePath } from "next/cache";
 
 async function DesktopNavbar() {
   const session = await auth();
@@ -36,6 +37,7 @@ async function DesktopNavbar() {
             action={async () => {
               "use server";
               await signOut({ redirectTo: "/" });
+              revalidatePath("/"); // Revalidate the home path after sign out
             }}
           >
             <Button

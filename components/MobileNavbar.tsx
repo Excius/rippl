@@ -21,6 +21,7 @@ import { useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
+import { revalidatePath } from "next/cache";
 
 interface MobileNavbarProps {
   user?: {
@@ -102,6 +103,7 @@ function MobileNavbar({ user }: MobileNavbarProps) {
                   onClick={() => {
                     setShowMobileMenu(false);
                     signOut({ redirectTo: "/" });
+                    revalidatePath("/");
                   }}
                   variant="ghost"
                   type="submit"
