@@ -22,6 +22,7 @@ import {
 import { Textarea } from "./ui/textarea";
 import { formatDistanceToNow } from "date-fns";
 import { DeleteAlertDialog } from "./DeleteAlertDialog";
+import { CldImage } from "next-cloudinary";
 
 type Posts = Awaited<ReturnType<typeof getPosts>>;
 type Post = Posts[number];
@@ -47,6 +48,7 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
 
       await toggleLike(post.id);
     } catch (error) {
+      console.error("Failed to toggle like:", error);
       setOptimisticLikes(post._count.likes);
       setHasLiked(post.likes.some((like) => like.userId === userId));
     } finally {
@@ -63,6 +65,7 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
         setNewComment("");
       }
     } catch (error) {
+      console.error("Failed to add comment:", error);
       toast.error("Failed to add comment");
     } finally {
       setIsCommenting(false);
@@ -76,6 +79,7 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
       if (result.success) toast.success("Post deleted successfully");
       else throw new Error(result.error);
     } catch (error) {
+      console.error("Failed to delete post:", error);
       toast.error("Failed to delete post");
     } finally {
       setIsDeleting(false);
@@ -130,7 +134,7 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
           {/* POST IMAGE */}
           {post.image && (
             <div className="rounded-lg overflow-hidden">
-              <img
+              <CldImage
                 src={post.image}
                 alt="Post content"
                 className="w-full h-auto object-cover"

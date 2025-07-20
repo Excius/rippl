@@ -11,6 +11,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { AvatarImage } from "@radix-ui/react-avatar";
 import { formatDistanceToNow } from "date-fns";
 import { HeartIcon, MessageCircleIcon, UserPlusIcon } from "lucide-react";
+import { CldImage } from "next-cloudinary";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -43,6 +44,7 @@ function NotificationsPage() {
         const unreadIds = data.filter((n) => !n.read).map((n) => n.id);
         if (unreadIds.length > 0) await markNotificationsAsRead(unreadIds);
       } catch (error) {
+        console.error("Failed to load notifications:", error);
         toast.error("Failed to load notifications");
       } finally {
         setLoading(false);
@@ -106,7 +108,7 @@ function NotificationsPage() {
                           <div className="text-sm text-muted-foreground rounded-md p-2 bg-muted/30 mt-2">
                             <p>{notification.post.content}</p>
                             {notification.post.image && (
-                              <img
+                              <CldImage
                                 src={notification.post.image}
                                 alt="Post content"
                                 className="mt-2 rounded-md w-full max-w-[200px] h-auto object-cover"
