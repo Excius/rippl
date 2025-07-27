@@ -102,8 +102,8 @@ function MobileNavbar({ user }: MobileNavbarProps) {
                 <Button
                   onClick={() => {
                     setShowMobileMenu(false);
-                    signOut({ redirectTo: "/" });
                     revalidatePath("/");
+                    signOut({ redirectTo: "/" });
                   }}
                   variant="ghost"
                   type="submit"

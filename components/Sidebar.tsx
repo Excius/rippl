@@ -26,7 +26,12 @@ async function Sidebar() {
               className="flex flex-col items-center justify-center"
             >
               <Avatar className="w-20 h-20 border-2 ">
-                <AvatarImage src={user.image || "/avatar.png"} />
+                <AvatarImage
+                  src={
+                    user.image ||
+                    "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                  }
+                />
               </Avatar>
 
               <div className="mt-4 space-y-1">

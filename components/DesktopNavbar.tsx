@@ -36,8 +36,8 @@ async function DesktopNavbar() {
           <form
             action={async () => {
               "use server";
-              await signOut({ redirectTo: "/" });
               revalidatePath("/"); // Revalidate the home path after sign out
+              await signOut({ redirectTo: "/" });
             }}
           >
             <Button

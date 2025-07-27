@@ -45,7 +45,12 @@ function CreatePost() {
         <div className="space-y-4">
           <div className="flex space-x-4">
             <Avatar className="w-10 h-10">
-              <AvatarImage src={session.data?.user?.image || "/avatar.png"} />
+              <AvatarImage
+                src={
+                  session.data?.user?.image ||
+                  "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                }
+              />
             </Avatar>
             <Textarea
               placeholder="What's on your mind?"

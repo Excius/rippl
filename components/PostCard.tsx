@@ -93,7 +93,12 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
           <div className="flex space-x-3 sm:space-x-4">
             <Link href={`/profile/${post.author.username ?? "null"}`}>
               <Avatar className="size-8 sm:w-10 sm:h-10">
-                <AvatarImage src={post.author.image ?? "/avatar.png"} />
+                <AvatarImage
+                  src={
+                    post.author.image ??
+                    "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                  }
+                />
               </Avatar>
             </Link>
 
@@ -200,7 +205,10 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
                   <div key={comment.id} className="flex space-x-3">
                     <Avatar className="size-8 flex-shrink-0">
                       <AvatarImage
-                        src={comment.author.image ?? "/avatar.png"}
+                        src={
+                          comment.author.image ??
+                          "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                        }
                       />
                     </Avatar>
                     <div className="flex-1 min-w-0">
@@ -226,7 +234,10 @@ function PostCard({ post, userId }: { post: Post; userId: string }) {
                 <div className="flex space-x-3">
                   <Avatar className="size-8 flex-shrink-0">
                     <AvatarImage
-                      src={session.data.user?.image || "/avatar.png"}
+                      src={
+                        session.data.user?.image ||
+                        "https://www.shutterstock.com/image-vector/user-profile-icon-vector-avatar-600nw-2247726673.jpg"
+                      }
                     />
                   </Avatar>
                   <div className="flex-1">
