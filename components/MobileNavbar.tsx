@@ -21,7 +21,7 @@ import { useState } from "react";
 import { useTheme } from "next-themes";
 import Link from "next/link";
 import { signOut } from "next-auth/react";
-import { revalidatePath } from "next/cache";
+import { useRouter } from "next/navigation";
 
 interface MobileNavbarProps {
   user?: {
@@ -35,6 +35,7 @@ interface MobileNavbarProps {
 function MobileNavbar({ user }: MobileNavbarProps) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
   const { theme, setTheme } = useTheme();
+  const router = useRouter();
 
   return (
     <div className="flex md:hidden items-center space-x-2">
@@ -102,7 +103,7 @@ function MobileNavbar({ user }: MobileNavbarProps) {
                 <Button
                   onClick={() => {
                     setShowMobileMenu(false);
-                    revalidatePath("/");
+                    router.refresh();
                     signOut({ redirectTo: "/" });
                   }}
                   variant="ghost"
